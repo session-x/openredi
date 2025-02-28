@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Dork Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+        .results { margin-top: 20px; }
+    </style>
+    <script>
+        function generateDorks() {
+            let domain = document.getElementById("domain").value.trim();
+            if (!domain) {
+                alert("Please enter a domain name.");
+                return;
+            }
+            let queries = [
+                `site:${domain} inurl:"redirect="`,
+                `site:${domain} inurl:"url="`,
+                `site:${domain} inurl:"next="`,
+                `site:${domain} inurl:"goto="`,
+                `site:${domain} inurl:"forward="`,
+                `site:${domain} inurl:"out="`,
+                `site:${domain} inurl:"return="`,
+                `site:${domain} inurl:"continue="`,
+                `site:${domain} inurl:"dest="`,
+                `site:${domain} inurl:"to="`,
+                `site:${domain} inurl:"checkout_url="`,
+                `site:${domain} inurl:"destination="`,
+                `site:${domain} inurl:"go="`,
+                `site:${domain} inurl:"image_url="`,
+                `site:${domain} inurl:"redir="`,
+                `site:${domain} inurl:"redirect_uri="`,
+                `site:${domain} inurl:"redirect_url="`,
+                `site:${domain} inurl:"return_path="`,
+                `site:${domain} inurl:"return_to="`,
+                `site:${domain} inurl:"returnTo="`,
+                `site:${domain} inurl:"rurl="`,
+                `site:${domain} inurl:"target="`,
+                `site:${domain} inurl:"view="`,
+                `site:${domain} inurl:"/redirect/"`
+            ];
+            let resultDiv = document.getElementById("results");
+            resultDiv.innerHTML = "";
+            queries.forEach(query => {
+                let link = document.createElement("a");
+                link.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                link.target = "_blank";
+                link.innerHTML = query;
+                link.style.display = "block";
+                resultDiv.appendChild(link);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Google Dork Search Generator</h2>
+    <input type="text" id="domain" placeholder="Enter domain (example.com)">
+    <button onclick="generateDorks()">Generate Dorks</button>
+    <div id="results" class="results"></div>
+</body>
+</html>
